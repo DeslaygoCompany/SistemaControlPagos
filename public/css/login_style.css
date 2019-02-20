@@ -1,0 +1,73 @@
+@font-face {
+  font-family: prime;
+  src: url(../fonts/Prime-Regular.ttf); 
+}
+body{
+    margin: 0;
+    min-height: 100vh;
+    background:url(../images/fondo-azul-jpg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+}
+body:before{
+    content: "";
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    
+    
+}
+
+.main-section{
+    margin:0 auto;
+    margin-top: 25%;
+    padding:0;   
+}
+.modal-content{
+    background-color:#3b4652; 
+    opacity: .95;
+    padding: 0 20px;
+    margin-top: 100px;
+    box-shadow: -3px 6px 5px 0px rgba(0,0,0,0.75);
+}
+.user-img{
+    margin-top: -60px;
+    margin-bottom: 35px;
+}
+.user-img img{
+    width: 200xp;
+    height: 130px;
+    box-shadow:-2px 6px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 40%;
+}
+.form-group input{
+    height:50px;
+    font-size: 18px;
+    border:0;
+    padding-left: 54px;
+    border-radius: 5px;    
+}
+button{
+    width: 60%;
+    margin: 5px 0;
+    
+}
+.forgot{
+    padding: 5px 0;
+}
+.forgot a{
+    color: white;
+}
+.fa-user{
+    color: white
+}
+.fa-lock{
+    color: white;
+}
+
