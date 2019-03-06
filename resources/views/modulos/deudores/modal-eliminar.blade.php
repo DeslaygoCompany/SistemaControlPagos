@@ -8,13 +8,29 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form method="post" action="{{ route('eliminar_deudor')}}">
+                {{ csrf_field() }}
                 <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-eliminar">Confirmar</button>
+                   <input type="hidden" id="id" name="id">
+                    <div class="row">
+                       <div class="col-12">
+                        <h3>¿Desea eliminar al deudor con el nombre?</h3>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                       <div class="col-2">
+                           <label for="nombre">Nombre</label>
+                       </div>
+                       <div class="col-10">
+                        <input type="text" class="form-control" id="nombre" name="nombre" readonly>
+                        </div>
+                    </div>
+                <div class="modal-footer mt-2">
+                    <button type="submit" class="btn btn-eliminar">Confirmar</button>
                     <button type="button" class="btn btn-eliminar" data-dismiss="modal">Cancelar</button>
                 </div>
+                 </div>
+                 </form>
             </div>
         </div>
     </div>

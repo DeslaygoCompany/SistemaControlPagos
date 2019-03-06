@@ -18,17 +18,7 @@
                 <a href="{{ route('exportarDeudores') }}" class="btn btn-agregar ml-2"><i class="fa fa-file-excel-o"></i> Exportar</a>
             </div>
             <div class="col-md-8">
-                 @if(session('success'))
-                         <div class="alert alert-success alert-dismissable" role="alert">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                             {{session('success')}}
-                         </div>
-                        @elseif(session('status'))
-                        <div class="alert alert-warning alert-dismissable" role="alert">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                             {{session('status')}}
-                         </div>
-                         @endif
+            @include('modulos.deudores.notificaciones')
             </div>
         </div>
         <div class="row mt-2 mb-2">
@@ -37,7 +27,8 @@
             </div>
         </div>
         <div class="row">
-            <table class="table table-bordered">
+           <div class="col-md-12">
+            <table id="tablaDeudores" class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
@@ -59,12 +50,13 @@
                        <td>{{$deudor->estado_republica}}</td>
                        <td>{{date('d-m-y',strtotime($deudor->fecha_nacimiento))}}</td>
                        <td>{{$deudor->deuda->total}}</td>
-                       <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor"><i class="fa fa-trash-o"></i></button></td>
-                        <td><a href="/perfil" class="btn btn-detalles" ><i class="fa fa-info-circle"></i></a></td>
+                       <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor" data-id="{{$deudor->id}}" data-nombre="{{$deudor->nombre}}" data-apellidos="{{$deudor->apellidos}}"><i class="fa fa-trash-o"></i></button></td>
+                        <td><a href="deudores/perfil/{{$deudor->id}}" class="btn btn-detalles" ><i class="fa fa-info-circle"></i></a></td>
                    </tr>
                    @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     

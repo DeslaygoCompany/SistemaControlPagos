@@ -11,7 +11,7 @@
                         <label for="nombre">Nombre</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="nombre" id="nombre" placeholder="El campo debe contener solo letras, máximo 50 caracteres" v-model="nombre" required v-bind:pattern="reglaLetras" title="Formato incorrecto" maxlength="50">
+                        <input class="form-control" type="text" name="nombre" id="nombre" placeholder="El campo debe contener solo letras, máximo 50 caracteres" v-model="nombre" required v-bind:pattern="reglaLetras" title="Formato incorrecto" maxlength="50" value="{{ old('nombre')}}">
                         <div class="invalid-feedback">
                             El campo nombre esta vacío o el formato es incorrecto
                         </div>
@@ -22,7 +22,7 @@
                         <label for="apellidos">Apellidos</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="El campo debe contener solo letras, máximo 100 caracteres" v-model="apellidos" v-bind:pattern="reglaLetras" maxlength="100" required>
+                        <input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="El campo debe contener solo letras, máximo 100 caracteres" v-model="apellidos" v-bind:pattern="reglaLetras" maxlength="100" required value="{{ old('apellidos')}}">
                         <div class="invalid-feedback">
                             El campo apellidos esta vacío o el formato es incorrecto
                         </div>
@@ -33,7 +33,7 @@
                         <label for="profesion">Profesión</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="profesion" id="profesion" placeholder="El campo debe contener solo letras, máximo 50 caracteres" v-bind:pattern="reglaLetras" maxlength="50" required>
+                        <input class="form-control" type="text" name="profesion" id="profesion" placeholder="El campo debe contener solo letras, máximo 50 caracteres" v-bind:pattern="reglaLetras" maxlength="50" required value="{{ old('profesion')}}">
                         <div class="invalid-feedback">
                             El campo profesión esta vacío o el formato es incorrecto
                         </div>
@@ -178,7 +178,7 @@
                        <h4 id="titulo-separator">Crear usuario para deudor</h4>
                     </div>
                     <div class="col-4">
-                        <button type="button" v-on:click="generar" class="btn btn-detalles"><i class="fa fa-gear"></i> Generar usuario</button>
+                        <button id="btnGenerarUser" type="button" v-on:click="generar" class="btn btn-detalles"><i class="fa fa-gear"></i> Generar usuario</button>
                     </div>
                     <div class="col-12">
                          <hr class="separator">
@@ -190,7 +190,7 @@
                         <label for="username">Nombre de usuario</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="username" id="username" placeholder="" v-model="user" readonly>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="" v-model="user" readonly required>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
@@ -207,11 +207,11 @@
                         <label for="contraseña">Contraseña</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="" v-model="user" readonly>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="" v-model="user" readonly required>
                     </div>
                 </div>
                 </div>
-                <button type="submit" class="btn btn-detalles"><i class="fa fa-floppy-o"></i> Guardar</button>
+                <button type="submit" id="btnGuardarDeudor" class="btn btn-detalles"><i class="fa fa-floppy-o"></i> Guardar</button>
             </form>
         </div>
     </div>

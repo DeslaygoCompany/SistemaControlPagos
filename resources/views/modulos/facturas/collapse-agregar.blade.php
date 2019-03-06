@@ -8,12 +8,18 @@
             <form action="">
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Nombre del deudor</label>
+                        <label for="deudor">Nombre del deudor</label>
                     </div>
                     <div class="col-sm-10">
-                        <select name="" id="" class="form-control">
-                            <option value="0">Seleccione...</option>
-                            <option value="1">Juan Rosas Pérez</option>
+                       <select class="custom-select" name="deudor" id="deudor" required>
+                            <option value="">Seleccione...</option>
+                            @if(isset($deudores))
+                            @foreach($deudores as $deudor)
+                            <option value="{{$deudor->id}}">{{$deudor->nombre}} {{$deudor->apellidos}}</option>
+                            @endforeach
+                            @else
+                            <option value="">No hay deudores</option>
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -54,7 +60,7 @@
                         <label for="">Fecha de expedición</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control">
+                    <input type="text" class="form-control" id="fecha_expedicion" name="fecha_expedicion" value="{{$fecha}}" readonly required>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
@@ -103,6 +109,19 @@
                     </div>
                     <div class="col-sm-10">
                         <input class="form-control" type="number" min="0" name="" id="" placeholder="Escriba el número de cuenta...">
+                    </div>
+                </div>
+                <div class="form-group row mt-1">
+                    <div class="col-sm-2">
+                        <label for="estado_civil">Estado de la factura</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <select class="custom-select" name="estado_civil" id="estado_civil" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Realizado">Realizado</option>
+                        </select>
+                         <div class="invalid-feedback">Debe elegir un estado civil</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
