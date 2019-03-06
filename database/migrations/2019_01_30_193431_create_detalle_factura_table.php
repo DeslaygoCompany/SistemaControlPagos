@@ -14,6 +14,8 @@ class CreateDetalleFacturaTable extends Migration
     public function up()
     {
         Schema::create('detalle_factura', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
             $table->increments('id');
             $table->string('metodo_pago',50);
             $table->string('banco',50);

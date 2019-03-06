@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 //Uso de los modelos
 use App\Detalle_deudor;
 use App\Deuda;
+use App\;
 use App\Deudor;
 use App\User;
 use Carbon\Carbon;
@@ -32,6 +33,8 @@ class AppController extends Controller
     //ruta para la página de pagos
     public function pagos(){
         $deudores= Deudor::all();
+        
+        
         $fe = Carbon::now('America/Chicago');
         $fecha = $fe->format('d/m/Y h:i');
         

@@ -14,6 +14,8 @@ class AddForeignKeysUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
             $table->engine = 'InnoDB';
              /*Modifica y agrega la llave id_deudor foranea a la tabla deudor*/
             $table->integer('id_deudor')->unsigned()->nullable();

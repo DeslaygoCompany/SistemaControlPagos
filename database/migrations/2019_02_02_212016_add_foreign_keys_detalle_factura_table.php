@@ -14,6 +14,12 @@ class AddForeignKeysDetalleFacturaTable extends Migration
     public function up()
     {
         Schema::table('detalle_factura', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
+            $table->engine = 'InnoDB';
+            /*Modifica y agrega la llave id_factura foranea a la tabla detalle_factura*/
+            $table->integer('id_factura')->unsigned()->nullable();
+            $table->foreign('id_factura')->references('id')->on('factura')->onDelete('cascade');
             //
         });
     }
@@ -27,6 +33,10 @@ class AddForeignKeysDetalleFacturaTable extends Migration
     {
         Schema::table('detalle_factura', function (Blueprint $table) {
             //
+             /*hace un drop a la llave foranea id_factura
+            si es que ya existe*/
+            $table->dropForeign('id_factura');
+            $table->dropColumn('id_factura');
         });
     }
 }

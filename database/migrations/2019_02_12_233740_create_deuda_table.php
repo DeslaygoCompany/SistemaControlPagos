@@ -14,6 +14,8 @@ class CreateDeudaTable extends Migration
     public function up()
     {
         Schema::create('deuda', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
             $table->increments('id');
             $table->string('banco_predilecto',100)->nullable();
             $table->decimal('total',8,2);
