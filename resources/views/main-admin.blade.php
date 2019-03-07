@@ -101,6 +101,7 @@
     
     <script src="{{asset('js/scriptEliminar.js')}}"></script>
     <script src="{{asset('js/verificarUser.js')}}"></script>
+    <script src="{{asset('js/seleccionarDeudor.js')}}"></script>
     
      @include('sweet::alert')
 </body>

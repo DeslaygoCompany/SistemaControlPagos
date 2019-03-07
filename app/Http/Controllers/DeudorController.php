@@ -59,7 +59,7 @@ class DeudorController extends Controller
         
         //obtención de los datos para deuda
         $banco_predilecto= $request->input('banco_predilecto');
-        $total= $request->input('total');
+        $total= $request->get('total');
         $concepto= $request->input('concepto');
         
         //obtención de los datos para usuario
@@ -68,17 +68,6 @@ class DeudorController extends Controller
         $password= $request->input('password');
         $rol ="Deudor";
         $exception= DB::beginTransaction();
-        
-        $verUser= User::where('username','user1')->first();
-        if(is_null($verUser)){
-            return response->json($verUser);
-        }
-        else{
-            $sesion = Session::flash('status');
-            return return response->json($verUser);
-            
-        }
-        
         try{
         //Guardar datos de deudor
         $deudor = new Deudor();
@@ -234,6 +223,29 @@ class DeudorController extends Controller
     //Método para exportar a excel
     public function exportarDeudores(){        
      return (new DeudorExport)->download('deudores.xlsx');
+    }
+    
+    //Metodo para devolver la información de un deudor seleccionado
+    public function seleccionarDeudor(Request $request){
+        $idDeudor = $request->get('idDeudor');
+        
+        $deudor = Deudor::where('id',$idDeudor)->first();
+        
+        //Generar el número de pago
+        $facturas = $deudor->facturas()->count();
+        $numFacturas= $facturas + 1;
+        //Obtiene los datos del deudor
+        $deuda = $deudor->deuda;
+        $concepto = $deuda->concepto;
+        $total = $deuda->total;
+        
+        
+        
+        return response()->json([
+            'numFacturas' => $numFacturas,
+            'concepto' => $concepto,
+            'total' => $total
+        ]);
     }
     
 }

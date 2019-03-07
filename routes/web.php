@@ -31,6 +31,7 @@ Route::get('/historial-pagos','DeudorController@historial')->name('historial-pag
 Route::get('/informacion-personal','DeudorController@informacion')->name('informacion-personal');
 Route::post('/eliminar_deudor','DeudorController@eliminar_deudor')->name('eliminar_deudor');
 Route::get('/getDeudores','DeudorController@getDeudores');
+Route::get('/seleccionarDeudor','DeudorController@seleccionarDeudor');
 
 /*RUTAS PARA GESTIONAR AL DEUDOR*/
 Route::post('/agregar_deudor','DeudorController@agregar_deudor')->name('agregar_deudor');

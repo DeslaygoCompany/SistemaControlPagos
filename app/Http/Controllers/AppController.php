@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 //Uso de los modelos
 use App\Detalle_deudor;
 use App\Deuda;
-use App\;
+use App\Factura;
 use App\Deudor;
 use App\User;
 use Carbon\Carbon;
@@ -26,6 +26,7 @@ class AppController extends Controller
     //ruta para la página de deudores
     public function deudores(){
         $deudores= Deudor::all();
+        
         return view('modulos.deudores.main',[
                    'deudores' =>  $deudores,
                    ]);
@@ -33,7 +34,10 @@ class AppController extends Controller
     //ruta para la página de pagos
     public function pagos(){
         $deudores= Deudor::all();
-        
+        //se genera un folio para la factura
+         $facturas= Factura::all();
+        $anchoFacturas = sizeof($facturas) + 1;
+        $folio = "FOL00".(string)$anchoFacturas;
         
         $fe = Carbon::now('America/Chicago');
         $fecha = $fe->format('d/m/Y h:i');
@@ -41,7 +45,8 @@ class AppController extends Controller
         
         return view('modulos.facturas.main',[
             'deudores' => $deudores,
-            'fecha'=> $fecha
+            'fecha'=> $fecha,
+            'folio' => $folio
         ]);
     }
     //ruta para la página de usuarios

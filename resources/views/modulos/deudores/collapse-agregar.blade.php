@@ -123,7 +123,7 @@
                         <label for="razon_social">Razón social</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="razon_social" id="razon_social" placeholder="El campo debe contener solo letras, máximo 30 caracteres" v-bind:pattern="reglaLetras" maxlength="30" required>
+                        <input class="form-control" type="text" name="razon_social" id="razon_social" placeholder="El campo debe contener solo letras, máximo 30 caracteres" v-bind:pattern="reglaLetras" maxlength="30" required readonly value="Consulting and Bussines Training">
                         <div class="invalid-feedback">El campo RFC esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
@@ -147,10 +147,10 @@
                 </div>
                  <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="banco_predilecto">Banco predilecto</label>
+                        <label for="banco_predilecto">Banco sugerido</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="banco_predilecto" id="banco_predilecto" placeholder="El campo debe contener solo letras, máximo 100 caracteres" maxlength="100" v-bind:pattern="reglaLetras" required>
+                        <input class="form-control" type="text" name="banco_predilecto" id="banco_predilecto" placeholder="El campo debe contener solo letras, máximo 100 caracteres" maxlength="100" v-bind:pattern="reglaLetras" required readonly value="ScotiaBank">
                         <div class="invalid-feedback">El campo banco predilecto esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
@@ -159,8 +159,21 @@
                         <label for="total">Total a pagar</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" name="total" id="total" min="0" placeholder="El campo debe contener solo números" maxlength="8" required>
-                        <div class="invalid-feedback">El campo total a pagar esta vacío o el formato es incorrecto</div>
+                        <select class="custom-select" name="total" id="total" required>
+                            <option value="">Seleccione...</option>
+                            <option value="25,000">25,000</option>
+                            <option value="26,000">26,000</option>
+                            <option value="25,000">27,000</option>
+                            <option value="26,000">28,000</option>
+                            <option value="25,000">29,000</option>
+                            <option value="26,000">30,000</option>
+                            <option value="25,000">31,000</option>
+                            <option value="26,000">32,000</option>
+                            <option value="25,000">33,000</option>
+                            <option value="26,000">34,000</option>
+                            <option value="35,000">35,000</option>
+                        </select>
+                         <div class="invalid-feedback">Debe elegir una cantidad para total</div>
                     </div>
                 </div>
                  <div class="form-group row mt-1">
@@ -168,7 +181,7 @@
                         <label for="concepto">Concepto</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="concepto" id="concepto" placeholder="El campo debe contener solo letras, máximo 50 caracteres" maxlength="50" v-bind:pattern="reglaLetras" required>
+                        <input class="form-control" type="text" name="concepto" id="concepto" placeholder="El campo debe contener solo letras, máximo 50 caracteres" maxlength="50" v-bind:pattern="reglaLetras" required readonly value="Pago de Servicio de Capacitación y Gestión Empresarial">
                         <div class="invalid-feedback">El campo concepto esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>

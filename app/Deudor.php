@@ -29,4 +29,8 @@ class Deudor extends Model
      public function user(){
         return $this->hasOne(User::class,'id_deudor');
     }
+    
+    public function facturas(){
+        return $this->hasMany(Factura::class,'id_deudor');
+    }
 }

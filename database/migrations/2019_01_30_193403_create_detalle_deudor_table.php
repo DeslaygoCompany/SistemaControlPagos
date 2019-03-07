@@ -22,7 +22,7 @@ class CreateDetalleDeudorTable extends Migration
             $table->string('pais',50)->nullable();
             $table->string('nacionalidad',30)->nullable();
             $table->string('rfc',14);
-            $table->string('razon_social',30);
+            $table->string('razon_social',100);
             $table->string('direccion',100);
             
             $table->timestamps();
