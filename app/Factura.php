@@ -23,4 +23,8 @@ class Factura extends Model
     public function detalle_factura(){
         return $this->hasOne(Detalle_factura::class,'id_factura');
     }
+    
+    public function deudor(){
+        return $this->belongsTo(Deudor::class,'id_deudor');
+    }
 }

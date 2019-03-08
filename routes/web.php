@@ -41,4 +41,9 @@ Route::post('/actualizar_deudor','DeudorController@actualizar_deudor')->name('ac
 Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores');
 
 Route::get('/validarUser','UserController@validarUser');
+/*RUTAS PARA GESTONAR LAS FACTURAS*/
+Route::post('/agregar_factura','FacturasController@agregar_factura');
+Route::post('/cambiarEstado','FacturasController@cambiarEstado')->name('cambiarEstado');
+Route::post('/eliminarFactura','FacturasController@eliminarFactura')->name('eliminarFactura');
+
 

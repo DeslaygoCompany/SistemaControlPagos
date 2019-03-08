@@ -19,9 +19,9 @@ class CreateDetalleFacturaTable extends Migration
             $table->increments('id');
             $table->string('metodo_pago',50);
             $table->string('banco',50);
-            $table->integer('no_cuenta');
+            $table->string('no_cuenta'.100);
             $table->decimal('cantidad',8,2);
-            $table->string('nota',100);
+            $table->string('nota',256);
             $table->timestamps();
         });
     }

@@ -112,13 +112,12 @@ class DeudorController extends Controller
         DB::commit();
             alert()->success('¡Operación exitosa!','El deudor se ha guardado correctamente.')->persistent('Cerrar');
             return back();
-            //return back()->with('success','El deudor se ha guardado correctamente.');
+           
         }catch(QueryException $ex){
             dd($ex);
             DB::rollBack();
             alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
             return back();
-            //return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
         }
 
     }
@@ -129,9 +128,10 @@ class DeudorController extends Controller
         try{
             $deudor = Deudor::where('id',$id)->first();
             $deudor->delete();
-            return back()->with('success','El deudor se elimino con exito.');
+           alert()->success('¡Operación exitosa!','El deudor se ha eliminado correctamente.')->persistent('Cerrar');
         }catch(QueryException $ex){
-            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
+             alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
+            return back();
              
         }
         
@@ -213,11 +213,12 @@ class DeudorController extends Controller
         $user->save();
             
         DB::commit();
-            return back()->with('success','El deudor se ha actualizado correctamente.');
+            alert()->success('¡Operación exitosa!','El deudor se ha actualizado correctamente.')->persistent('Cerrar');
+        return back();
         }catch(QueryException $ex){
-            dd($ex);
             DB::rollBack();
-            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
+              alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
+            return back();
         }
     }
     //Método para exportar a excel

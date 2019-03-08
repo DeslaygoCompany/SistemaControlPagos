@@ -46,7 +46,8 @@ class AppController extends Controller
         return view('modulos.facturas.main',[
             'deudores' => $deudores,
             'fecha'=> $fecha,
-            'folio' => $folio
+            'folio' => $folio,
+            'facturas' => $facturas
         ]);
     }
     //ruta para la página de usuarios

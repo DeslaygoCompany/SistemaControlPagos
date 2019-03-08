@@ -5,7 +5,7 @@
             <h3 id="title-info"><strong>Registrar un pago</strong></h3>
         </div>
         <div class="card card-body">
-            <form id="formAgregarFactura" class="needs-validation" action="" novalidate>
+            <form id="formAgregarFactura" class="needs-validation" action="/agregar_factura" method="post" novalidate>
                {{ csrf_field() }}
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
@@ -99,7 +99,7 @@
                         <label for="">Concepto</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" value="prueba" type="text" name="concepto" id="concepto" placeholder="Se llenará cuando eliga un deudor" required readonly>
+                        <input class="form-control" type="text" name="concepto" id="concepto" placeholder="Se llenará cuando eliga un deudor" required readonly>
                         <div class="invalid-feedback">El campo concepto esta vacío, se llena cuando elige un deudor</div>
                     </div>
                 </div>
@@ -136,10 +136,10 @@
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="estado_civil">Estado de la factura</label>
+                        <label for="estado">Estado de la factura</label>
                     </div>
                     <div class="col-sm-10">
-                        <select class="custom-select" name="estado_civil" id="estado_civil" required>
+                        <select class="custom-select" name="estado" id="estado" required>
                             <option value="">Seleccione...</option>
                             <option value="Pendiente">Pendiente</option>
                             <option value="Realizado">Realizado</option>
@@ -152,7 +152,7 @@
                         <label for="cantidad">Cantidad</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" name="cantidad" id="cantidad" placeholder="Escriba la cantidad..." required min="0">
+                        <input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Escriba la cantidad..." required min="0">
                         <div class="invalid-feedback">El campo cantidad esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>

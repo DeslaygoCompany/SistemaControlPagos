@@ -89,11 +89,32 @@
                     </div>
                     <div class="col-sm-10">
                         <select class="custom-select" name="estado_civil" id="estado_civil" required>
+                            
+                            @if($deudor->estado_civil == "Soltero")
                             <option value="">Seleccione...</option>
                             <option selected value="Soltero">Soltero</option>
                             <option value="Casado">Casado</option>
                             <option value="Viudo">Viudo</option>
                             <option value="Divorciado">Divorciado</option>
+                            @elseif($deudor->estado_civil == "Casado")
+                            <option value="">Seleccione...</option>
+                            <option value="Soltero">Soltero</option>
+                            <option selected value="Casado">Casado</option>
+                            <option value="Viudo">Viudo</option>
+                            <option value="Divorciado">Divorciado</option>
+                            @elseif($deudor->estado_civil == "Viudo")
+                            <option value="">Seleccione...</option>
+                            <option value="Soltero">Soltero</option>
+                            <option value="Casado">Casado</option>
+                            <option selected value="Viudo">Viudo</option>
+                            <option value="Divorciado">Divorciado</option>
+                            @elseif($deudor->estado_civil == "Divorciado")
+                            <option value="">Seleccione...</option>
+                            <option value="Soltero">Soltero</option>
+                            <option value="Casado">Casado</option>
+                            <option value="Viudo">Viudo</option>
+                            <option selected value="Divorciado">Divorciado</option>
+                            @endif
                         </select>
                          <div class="invalid-feedback">Debe elegir un estado civil</div>
                     </div>

@@ -21,7 +21,7 @@ class CreateFacturaTable extends Migration
             $table->string('nombre_empresa',50);
             $table->string('direccion',100);
             $table->string('telefono',15);
-            $table->datetime('fecha_expedicion');
+            $table->string('fecha_expedicion',50);
             $table->string('estado');
             $table->integer('no_pago');
             $table->date('fecha_pago');
