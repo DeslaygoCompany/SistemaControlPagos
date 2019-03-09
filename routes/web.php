@@ -39,6 +39,8 @@ Route::post('/actualizar_deudor','DeudorController@actualizar_deudor')->name('ac
 
 /*RUTAS PARA EXPORTAR A EXCEL*/
 Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores');
+Route::get('/exportarFacturas','FacturasController@exportarFacturas')->name('exportarFacturas');
+
 
 Route::get('/validarUser','UserController@validarUser');
 /*RUTAS PARA GESTONAR LAS FACTURAS*/

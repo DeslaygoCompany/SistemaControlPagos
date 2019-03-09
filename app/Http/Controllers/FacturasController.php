@@ -9,6 +9,8 @@ use Illuminate\Database\QueryException;
 use App\Factura;
 use App\Detalle_factura;
 
+use App\Exports\FacturasExport;
+
 class FacturasController extends Controller
 {
     //Método para agregar una factura
@@ -116,6 +118,11 @@ class FacturasController extends Controller
             return back();
         }
         
+    }
+    
+    //Método para exportar a excel
+    public function exportarFacturas(){        
+     return (new FacturasExport)->download('Pagos.xlsx');
     }
     
 }

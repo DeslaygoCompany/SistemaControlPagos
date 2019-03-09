@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-4">
                 <button class="btn btn-agregar" type="button" data-toggle="collapse" data-target="#collapseAgregar" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus-circle"></i> Agregar Pago</button>
-                <button class="btn btn-agregar ml-2"><i class="fa fa-file-excel-o"></i> Exportar</button>
+                <a href="/exportarFacturas" class="btn btn-agregar ml-2"><i class="fa fa-file-excel-o"></i> Exportar</a>
             </div>
         </div>
         <div class="row mt-2 mb-2">
