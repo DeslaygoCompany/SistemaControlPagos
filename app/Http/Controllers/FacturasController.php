@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException; 
+use Illuminate\Support\Facades\View;
 
+use App\Deudor;
 use App\Factura;
 use App\Detalle_factura;
 
 use App\Exports\FacturasExport;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class FacturasController extends Controller
 {
@@ -123,6 +127,23 @@ class FacturasController extends Controller
     //Método para exportar a excel
     public function exportarFacturas(){        
      return (new FacturasExport)->download('Pagos.xlsx');
+    }
+    
+    //Método para mostrar la factura de un deudor
+    public function verFactura(Factura $factura){
+        $view = View::make('modulos.facturas.factura',['factura' => $factura])->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('factura');
+        
+    
+    }
+    //Método para descargar la factura de un deudor
+     public function descargarFactura(Factura $factura){
+        $nombre = $factura->deudor->nombre . " ". $factura->deudor->apellidos; 
+        $pdf = PDF::loadView('modulos.facturas.factura',['factura' => $factura]);
+        return $pdf->download('factura de '.$nombre.' .pdf');
+    
     }
     
 }

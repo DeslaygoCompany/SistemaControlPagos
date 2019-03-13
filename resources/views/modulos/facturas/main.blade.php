@@ -39,7 +39,8 @@
                         <th scope="col">Total</th>
                         <th scope="col">Cambiar estado</th>
                         <th scope="col">Eliminar</th>
-                        <th scope="col">Ver detalles</th>
+                        <th scope="col">Descargar factura</th>
+                        <th scope="col">Ver factura</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +61,8 @@
                        <td>{{$factura->deudor->deuda->total}}</td>
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalCambiar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}"><i class="fa fa-toggle-on"></i></button></td>
                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarFactura" data-id="{{$factura->id}}" data-folio="{{$factura->folio}}"><i class="fa fa-trash-o"></i></button></td>
-                       <td><button class="btn btn-detalles" ><i class="fa fa-info-circle"></i></button></td>
+                       <td><a href="descargarFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-download"></i></a></td>
+                        <td><a href="verFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-file-pdf-o"></i></a></td>
                    </tr>
                    @endforeach
                 </tbody>

@@ -47,5 +47,8 @@ Route::get('/validarUser','UserController@validarUser');
 Route::post('/agregar_factura','FacturasController@agregar_factura');
 Route::post('/cambiarEstado','FacturasController@cambiarEstado')->name('cambiarEstado');
 Route::post('/eliminarFactura','FacturasController@eliminarFactura')->name('eliminarFactura');
+Route::get('/verFactura','FacturasController@verFactura')->name('verFactura');
+Route::get('/descargarFactura/{factura}','FacturasController@descargarFactura');
+Route::get('/verFactura/{factura}','FacturasController@verFactura');
 
 
