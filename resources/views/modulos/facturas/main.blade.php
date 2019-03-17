@@ -37,6 +37,7 @@
                         <th scope="col">Método de pago</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Total</th>
+                        <th scope="col">Editar</th>
                         <th scope="col">Cambiar estado</th>
                         <th scope="col">Eliminar</th>
                         <th scope="col">Descargar factura</th>
@@ -59,6 +60,7 @@
                        <td>{{$factura->detalle_factura->metodo_pago}}</td>
                        <td>{{$factura->detalle_factura->cantidad}}</td>
                        <td>{{$factura->deudor->deuda->total}}</td>
+                       <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalModificar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}" data-fecha="{{$factura->fecha_pago}}" data-metodo="{{$factura->detalle_factura->metodo_pago}}" data-banco="{{$factura->detalle_factura->banco}}" data-cantidad="{{$factura->detalle_factura->cantidad}}" data-idfact="{{$factura->detalle_factura->id}}"><i class="fa fa-pencil-square-o"></i></button></td>
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalCambiar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}"><i class="fa fa-toggle-on"></i></button></td>
                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarFactura" data-id="{{$factura->id}}" data-folio="{{$factura->folio}}"><i class="fa fa-trash-o"></i></button></td>
                        <td><a href="descargarFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-download"></i></a></td>
@@ -76,6 +78,7 @@
 <!--Inicio de modales-->
 @include('modulos.facturas.modal-eliminar')
 @include('modulos.facturas.modal-cambiar')
+@include('modulos.facturas.modal-modificar')
 <!--Fin de modales-->
 @endsection
 <!--fin del contenido de deudores-->

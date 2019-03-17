@@ -13,46 +13,44 @@
     <h3 id="title-info"><strong>Historial de pagos</strong></h3>
   </div>
   <div class="card-body">
-    <table class="table table-bordered">
+   <table class="table table-bordered" id="tablaFacturas">
                 <thead>
                     <tr>
                         <th scope="col">Folio</th>
-                        <th scope="col">Nombre de la empresa</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Teléfono</th>
+                        <th scope="col">Estado de la factura</th>
                         <th scope="col">Fecha de expedición</th>
                         <th scope="col">Número de pago</th>
                         <th scope="col">Fecha de pago</th>
-                        <th scope="col">Eliminar</th>
-                        <th scope="col">Ver detalles</th>
+                        <th scope="col">Método de pago</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Descargar factura</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>05689</td>
-                        <td>Empresa X</td>
-                        <td>5 sur</td>
-                        <td>2225832819</td>
-                        <td>10/02/1980</td>
-                        <td>109037</td>
-                        <td>10/02/1980</td>
-                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor"><i class="fa fa-trash-o"></i></button></td>
-                        <td><button class="btn btn-detalles" ><i class="fa fa-info-circle"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>05689</td>
-                        <td>Empresa X</td>
-                        <td>5 sur</td>
-                        <td>2225832819</td>
-                        <td>10/02/1980</td>
-                        <td>109037</td>
-                        <td>10/02/1980</td>
-                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor"><i class="fa fa-trash-o"></i></button></td>
-                        <td><button class="btn btn-detalles"><i class="fa fa-info-circle"></i></button></td>
-                    </tr>        
+                   @foreach($facturas as $factura)
+                   @if($factura->id_deudor == Auth::user()->id_deudor)
+                   <tr>
+                       <td>{{$factura->folio}}</td>
+                       @if($factura->estado == "Realizado")
+                       <td class="estado"><div class="estado-realizado">1</div></td>
+                       @elseif($factura->estado == "Pendiente")
+                       <td class="estado"><div class="estado-pendiente">0</div></td>
+                       @endif
+                       <td>{{$factura->fecha_expedicion}}</td>
+                       <td>{{$factura->no_pago}}</td>
+                       <td>{{$factura->fecha_pago}}</td>
+                       <td>{{$factura->detalle_factura->metodo_pago}}</td>
+                       <td>{{$factura->detalle_factura->cantidad}}</td>
+                       <td>{{$factura->deudor->deuda->total}}</td>
+                       <td><a href="/descargarFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-download"></i></a></td>
+                   </tr>
+                   @endif
+                   @endforeach
                 </tbody>
             </table>
-</div>
+  
+  </div>
   </div>
     
 

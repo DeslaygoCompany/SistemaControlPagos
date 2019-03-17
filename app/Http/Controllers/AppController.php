@@ -36,8 +36,14 @@ class AppController extends Controller
         $deudores= Deudor::all();
         //se genera un folio para la factura
          $facturas= Factura::all();
-        $anchoFacturas = sizeof($facturas) + 1;
-        $folio = "FOL00".(string)$anchoFacturas;
+        $ultimaFact = $facturas->last();
+        if(is_null($ultimaFact)){
+            $folio= 1;
+            
+        }else{
+         $numFact = $ultimaFact->folio;
+         $folio = $numFact + 1;
+        }
         
         $fe = Carbon::now('America/Chicago');
         $fecha = $fe->format('d/m/Y h:i');
@@ -55,15 +61,13 @@ class AppController extends Controller
         return view('modulos.usuarios.main');
     }
     
-    public function actual_date ()  
-{  
-    $week_days = array ("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");  
-    $months = array ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");  
-    $year_now = date ("Y");  
-    $month_now = date ("n");  
-    $day_now = date ("j");  
-    $week_day_now = date ("w");  
-    $date = $week_days[$week_day_now] . ", " . $day_now . " de " . $months[$month_now] . " de " . $year_now;   
-    return $date;    
-}
+    //ruta que muestra la informacionen el perfil del deudor
+    public function informacion(){
+        return view('modulos.perfil-deudor.informacion');
+    }
+    
+    //En caso de no encontrar la ruta
+    public function notFound(){
+        return view('modulos.errors.404');
+    }
 }

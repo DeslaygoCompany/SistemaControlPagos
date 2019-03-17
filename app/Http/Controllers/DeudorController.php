@@ -8,12 +8,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 //Uso de los modelos
 use App\Detalle_deudor;
 use App\Deuda;
 use App\Deudor;
 use App\User;
+use App\Factura;
 
 //uso de la clase de exportacion
 use App\Exports\DeudorExport;
@@ -22,14 +24,19 @@ class DeudorController extends Controller
 {
     //Método para mostrar el perfil del deudor
     public function perfil(Deudor $deudor){
+        $facturas = $deudor->facturas;
         return view('modulos.deudores.perfil',[
             'deudor' => $deudor,
+            'facturas' => $facturas,
         ]);
     }
     
     //Método para mostrar el historial de pagos del deudor
     public function historial(){
-        return view('modulos.perfil-deudor.historial-pagos');
+        $facturas = Factura::all();
+        return view('modulos.perfil-deudor.historial-pagos',[
+            'facturas' => $facturas,
+        ]);
     }
     
     //Método para mostrar la información del deudor
@@ -65,7 +72,7 @@ class DeudorController extends Controller
         //obtención de los datos para usuario
         $username = $request->input('username');
         $email= $request->input('email');
-        $password= $request->input('password');
+        $password= Hash::make($request->input('password'));
         $rol ="Deudor";
         $exception= DB::beginTransaction();
         try{
@@ -168,7 +175,7 @@ class DeudorController extends Controller
         //obtención de los datos para usuario
         $username = $request->input('username');
         $email= $request->input('email');
-        $password= $request->input('password');
+        $password= Hash::make($request->input('password'));
         $rol ="Deudor";
         $exception= DB::beginTransaction();
         try{

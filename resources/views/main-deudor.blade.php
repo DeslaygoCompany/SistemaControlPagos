@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Mayra ruiz y Javier Delgado 2019">
+    <link rel="icon" href="{{asset('images/logocbt.ico')}}">
 
     <title>Control de pagos</title>
 
@@ -18,13 +19,22 @@
 
     <!--Libreria de fontawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-</head>
-
+     <style>
+         #logo{
+             width: 100px;
+             height: 50px;
+             margin:0;
+             padding:0;
+         }
+    </style>
+    </head>
+   
 
 <body>
+   
     <div class="container">
         <nav class="navbar navbar-expand-md fixed-top">
-            <a class="navbar-brand ml-5" href="#">Control de pagos</a>
+            <a class="navbar-brand ml-5" href="/historial-pagos"><img id="logo" src="{{asset('images/logocbt.png')}}" alt="LOGO C&BT"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
@@ -41,10 +51,13 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle mr-5" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> Deudor</a>
+                        <a class="nav-link dropdown-toggle mr-5" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i>{{Auth::user()->username}}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#"><i class="fa fa-address-book" aria-hidden="true"></i> Información</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
+                            <a class="dropdown-item" href="/informacion-personal"><i class="fa fa-address-book" aria-hidden="true"></i> Información</a>
+                          <form method="post" action="{{ route('logout') }}">
+                               @csrf
+                                <button class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</button>
+                            </form>
                             <a class="dropdown-item" href="#"></a>
                         </div>
                     </li>

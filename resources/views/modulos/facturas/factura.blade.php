@@ -32,21 +32,40 @@
                     
                </div>
                <hr class="style3">
-           <div id="infofact">
-               <p>Nombre del cliente ......................................{{$factura->deudor->nombre}} {{$factura->deudor->apellidos}}</p>
-               <br>
-               <p>Banco......................................{{$factura->detalle_factura->banco}}</p>
-               <br>
-               <p>Método de pago......................................{{$factura->detalle_factura->metodo_pago}}</p>
-               <br>
-               <p>Fecha de pago......................................{{$factura->fecha_pago}}</p>
-               <br>
-               <p>Número de pago......................................{{$factura->no_pago}}</p>
-               <br>
-               <p>cantidad......................................{{$factura->detalle_factura->cantidad}}</p>
-               <br>
-               <p>Total............................................................................{{$factura->detalle_factura->cantidad}}</p>
-           </div>
+               <table>
+       <thead>
+           <tr>
+               <th scope="col">Nombre: </th>
+               <th class="data">{{$factura->deudor->nombre}} {{$factura->deudor->apellidos}}</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td> <strong>Número de pago:</strong></td>
+               <td class="data">{{$factura->no_pago}}</td>
+           </tr>
+           <tr>
+               <td> <strong>Banco:</strong></td>
+               <td class="data">{{$factura->detalle_factura->banco}}</td>
+           </tr>
+           <tr>
+               <td><strong>Método de pago:</strong></td>
+               <td class="data">{{$factura->detalle_factura->metodo_pago}}</td>
+           </tr>
+           <tr>
+               <td><strong>Fecha de pago:</strong></td>
+               <td class="data">{{$factura->fecha_pago}}</td>
+           </tr>
+           <tr>
+               <td><strong>Cantidad:</strong> </td>
+               <td class="data">{{$factura->detalle_factura->cantidad}}</td>
+           </tr>
+           <tr>
+               <td><strong>Total: </strong></td>
+               <td class="data">{{$factura->detalle_factura->cantidad}}</td>
+           </tr>
+       </tbody>
+   </table>
            <hr class="style3">
            <div id="nota">
                <p><strong>Nota: </strong> Este documento solo es válido siempre y cuando exista el original en las oficinas</p>

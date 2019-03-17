@@ -27,10 +27,12 @@ body:before{
 .main-section{
     margin:0 auto;
     margin-top: 25%;
-    padding:0;   
+    padding:0;
+    width: 100%;
 }
 .modal-content{
     background-color:#3b4652; 
+    width: 100%;
     opacity: .95;
     padding: 0 20px;
     margin-top: 100px;
@@ -68,6 +70,9 @@ button{
     color: white
 }
 .fa-lock{
+    color: white;
+}
+#titulo{
     color: white;
 }
 

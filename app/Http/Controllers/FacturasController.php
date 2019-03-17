@@ -129,6 +129,38 @@ class FacturasController extends Controller
      return (new FacturasExport)->download('Pagos.xlsx');
     }
     
+    //Método para modificar la factura
+    public function modificarFactura(Request $request){
+        $id = $request->input('id');
+        $idDetallefact = $request->input('idfact');
+        $fecha_pago = $request->get('fecha_pago');
+        $metodo_pago = $request->get('metodo_pago');
+        $estado = $request->get('estado');
+        $banco = $request->input('banco');
+        $cantidad = $request->input('cantidad');
+        
+        try{
+        $factura = Factura::where('id',$id)->first();
+        $factura->fecha_pago = $fecha_pago;
+        $factura->estado = $estado;
+        $factura->save();
+        
+        
+        $detalleFactura = Detalle_factura::where('id',$idDetallefact)->first();
+        $detalleFactura->metodo_pago= $metodo_pago;
+        $detalleFactura->banco= $banco;
+        $detalleFactura->cantidad = $cantidad;
+        $detalleFactura->save();
+        alert()->success('¡Operación exitosa!','La factura de pago se ha editado correctamente.')->persistent('Cerrar');
+        return back();
+            
+        }catch(QueryException $ex){
+            alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
+            return back();
+            
+        }
+    }
+    
     //Método para mostrar la factura de un deudor
     public function verFactura(Factura $factura){
         $view = View::make('modulos.facturas.factura',['factura' => $factura])->render();

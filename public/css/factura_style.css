@@ -1,9 +1,6 @@
-.card-header{
-    background-color: #ecf0f1;
-}
 #conteindo{
     margin-top: 100px;
-    background-color: #ecf0f1;
+    background-color: white;
 }
 
 #logoEmpresa{
@@ -31,11 +28,16 @@ p{
 #dir{
     margin-left: 20px;
 }
-#infofact{
-    margin-left: 35px;
-}
 #nota{
     margin-top: 10px;
     margin-left: 35px;
     text-align: justify;
+}
+table{
+    margin-left: 35px;
+    border:0;
+    
+}
+.data{
+   padding-left: 200px;
 }

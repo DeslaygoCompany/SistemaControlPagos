@@ -11,24 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
+
+/*RUTAS PARA EL LOGEO DE UN USUARIO*/
+Route::post('/login','Auth\LoginController@login')->name('login');
+Route::post('/logout','Auth\LoginController@logout')->name('logout');
+//Auth::routes();
 
 //Rutas para el administrador
-Route::get('/main','AppController@mainAdmin')->name('main');
-Route::get('/deudores','AppController@deudores')->name('deudores');
-Route::get('/pagos','AppController@pagos')->name('pagos');
-Route::get('/usuarios','AppController@usuarios')->name('usuarios');
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/main','AppController@mainAdmin')->name('main')->middleware('auth');
+Route::get('/deudores','AppController@deudores')->name('deudores')->middleware('auth');
+Route::get('/pagos','AppController@pagos')->name('pagos')->middleware('auth');
+Route::get('/usuarios','AppController@usuarios')->name('usuarios')->middleware('auth');
+
 
 Route::get('/deudores/perfil/{deudor}', 'DeudorController@perfil')->name('perfil');
 
 //Rutas para el deudor
-Route::get('/main-deudor','AppController@mainDeudo')->name('main-deudor');
-Route::get('/historial-pagos','DeudorController@historial')->name('historial-pagos');
-Route::get('/informacion-personal','DeudorController@informacion')->name('informacion-personal');
+
+Route::get('/informacion-personal','DeudorController@informacion')->name('informacion-personal')->middleware('auth');
 Route::post('/eliminar_deudor','DeudorController@eliminar_deudor')->name('eliminar_deudor');
 Route::get('/getDeudores','DeudorController@getDeudores');
 Route::get('/seleccionarDeudor','DeudorController@seleccionarDeudor');
@@ -38,8 +39,8 @@ Route::post('/agregar_deudor','DeudorController@agregar_deudor')->name('agregar_
 Route::post('/actualizar_deudor','DeudorController@actualizar_deudor')->name('actualizar_deudor');
 
 /*RUTAS PARA EXPORTAR A EXCEL*/
-Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores');
-Route::get('/exportarFacturas','FacturasController@exportarFacturas')->name('exportarFacturas');
+Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores')->middleware('auth');
+Route::get('/exportarFacturas','FacturasController@exportarFacturas')->name('exportarFacturas')->middleware('auth');
 
 
 Route::get('/validarUser','UserController@validarUser');
@@ -47,8 +48,15 @@ Route::get('/validarUser','UserController@validarUser');
 Route::post('/agregar_factura','FacturasController@agregar_factura');
 Route::post('/cambiarEstado','FacturasController@cambiarEstado')->name('cambiarEstado');
 Route::post('/eliminarFactura','FacturasController@eliminarFactura')->name('eliminarFactura');
-Route::get('/verFactura','FacturasController@verFactura')->name('verFactura');
-Route::get('/descargarFactura/{factura}','FacturasController@descargarFactura');
-Route::get('/verFactura/{factura}','FacturasController@verFactura');
+Route::post('/modificarFactura','FacturasController@modificarFactura')->name('modificarFactura');
+
+Route::get('/verFactura','FacturasController@verFactura')->name('verFactura')->middleware('auth');
+Route::get('/descargarFactura/{factura}','FacturasController@descargarFactura')->middleware('auth');
+Route::get('/verFactura/{factura}','FacturasController@verFactura')->middleware('auth');
 
 
+/*RUTAS PARA EL PERFIL DEL DEUDOR*/
+Route::get('/informacion','AppController@informacion')->name('informacion')->middleware('auth');
+Route::get('/historial-pagos','DeudorController@historial')->name('historial-pagos')->middleware('auth');
+
+Route::fallback('AppController@notFound');
