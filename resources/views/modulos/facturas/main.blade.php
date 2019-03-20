@@ -31,16 +31,13 @@
                         <th scope="col">Folio</th>
                         <th scope="col">Estado de la factura</th>
                         <th scope="col">Nombre del deudor</th>
-                        <th scope="col">Fecha de expedición</th>
-                        <th scope="col">Número de pago</th>
+                        <th scope="col">No. pago</th>
                         <th scope="col">Fecha de pago</th>
                         <th scope="col">Método de pago</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Total</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Cambiar estado</th>
                         <th scope="col">Eliminar</th>
-                        <th scope="col">Descargar factura</th>
                         <th scope="col">Ver factura</th>
                     </tr>
                 </thead>
@@ -54,16 +51,13 @@
                        <td class="estado"><div class="estado-pendiente">0</div></td>
                        @endif
                        <td>{{$factura->deudor->nombre}} {{$factura->deudor->apellidos}}</td>
-                       <td>{{$factura->fecha_expedicion}}</td>
                        <td>{{$factura->no_pago}}</td>
-                       <td>{{$factura->fecha_pago}}</td>
+                       <td>{{date('d-m-y',strtotime($factura->fecha_pago))}}</td>
                        <td>{{$factura->detalle_factura->metodo_pago}}</td>
                        <td>{{$factura->detalle_factura->cantidad}}</td>
-                       <td>{{$factura->deudor->deuda->total}}</td>
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalModificar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}" data-fecha="{{$factura->fecha_pago}}" data-metodo="{{$factura->detalle_factura->metodo_pago}}" data-banco="{{$factura->detalle_factura->banco}}" data-cantidad="{{$factura->detalle_factura->cantidad}}" data-idfact="{{$factura->detalle_factura->id}}"><i class="fa fa-pencil-square-o"></i></button></td>
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalCambiar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}"><i class="fa fa-toggle-on"></i></button></td>
                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarFactura" data-id="{{$factura->id}}" data-folio="{{$factura->folio}}"><i class="fa fa-trash-o"></i></button></td>
-                       <td><a href="descargarFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-download"></i></a></td>
                         <td><a href="verFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-file-pdf-o"></i></a></td>
                    </tr>
                    @endforeach

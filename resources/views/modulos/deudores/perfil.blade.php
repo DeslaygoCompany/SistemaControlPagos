@@ -281,7 +281,7 @@
                     <tr>
                         <th scope="col">Folio</th>
                         <th scope="col">Estado de la factura</th>
-                        <th scope="col">Número de pago</th>
+                        <th scope="col">No. pago</th>
                         <th scope="col">Fecha de pago</th>
                         <th scope="col">Método de pago</th>
                         <th scope="col">Cantidad</th>
@@ -289,7 +289,6 @@
                         <th scope="col">Editar</th>
                         <th scope="col">Cambiar estado</th>
                         <th scope="col">Eliminar</th>
-                        <th scope="col">Descargar factura</th>
                         <th scope="col">Ver factura</th>
                     </tr>
                 </thead>
@@ -310,7 +309,6 @@
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalModificar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}" data-fecha="{{$factura->fecha_pago}}" data-metodo="{{$factura->detalle_factura->metodo_pago}}" data-banco="{{$factura->detalle_factura->banco}}" data-cantidad="{{$factura->detalle_factura->cantidad}}" data-idfact="{{$factura->detalle_factura->id}}"><i class="fa fa-pencil-square-o"></i></button></td>
                        <td><button class="btn btn-cambiar" data-toggle="modal" data-target="#modalCambiar" data-id="{{$factura->id}}" data-estado="{{$factura->estado}}"><i class="fa fa-toggle-on"></i></button></td>
                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarFactura" data-id="{{$factura->id}}" data-folio="{{$factura->folio}}"><i class="fa fa-trash-o"></i></button></td>
-                       <td><a href="descargarFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-download"></i></a></td>
                         <td><a href="verFactura/{{$factura->id}}" class="btn btn-detalles" ><i class="fa fa-file-pdf-o"></i></a></td>
                    </tr>
                    @endforeach

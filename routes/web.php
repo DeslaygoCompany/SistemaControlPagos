@@ -41,6 +41,8 @@ Route::post('/actualizar_deudor','DeudorController@actualizar_deudor')->name('ac
 /*RUTAS PARA EXPORTAR A EXCEL*/
 Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores')->middleware('auth');
 Route::get('/exportarFacturas','FacturasController@exportarFacturas')->name('exportarFacturas')->middleware('auth');
+Route::get('/exportarUsuarios','UserController@exportarUsuarios')->name('exportarUsuarios')->middleware('auth');
+
 
 
 Route::get('/validarUser','UserController@validarUser');

@@ -37,12 +37,8 @@
                                     <label for="rol">Rol</label>
                                 </div>
                                 <div class="col-sm-10">
-                                     <select class="form-control" id="rol" name="rol" required>
-                                        <option value="">Seleccione...</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Deudor">Deudor</option>
-                                    </select>
-                                    <div class="invalid-feedback">Debe elegir un rol</div>
+                                     <input type="text" class="form-control" id="rol" name="rol" value="Administrador" required readonly>
+                                    <div class="invalid-feedback">El campo rol esta vacío</div>
                                 </div>
                             </div>
                             <button class="btn btn-detalles"><i class="fa fa-floppy-o"></i> Guardar Usuario</button>

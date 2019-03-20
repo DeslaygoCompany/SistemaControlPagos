@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
-
+use App\Exports\usersExport;
 use App\User;
 
 class UserController extends Controller
@@ -26,7 +26,7 @@ class UserController extends Controller
 	public function agregarUser(Request $request){
 		$username = $request->input('username');
 		$email = $request->input('email');
-		$rol = $request->get('rol');
+		$rol = $request->input('rol');
 		$password= Hash::make($request->input('password'));
 		
 		try{
@@ -63,5 +63,10 @@ class UserController extends Controller
             //return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
         }
 	}
+    
+     public function exportarUsuarios(){
+         return (new usersExport)->download('Usuarios.xlsx');
+         
+     }
 }
 
