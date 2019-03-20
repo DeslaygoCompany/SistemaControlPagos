@@ -40,4 +40,6 @@ Route::post('/actualizar_deudor','DeudorController@actualizar_deudor')->name('ac
 Route::get('/exportarDeudores','DeudorController@exportarDeudores')->name('exportarDeudores');
 
 Route::get('/validarUser','UserController@validarUser');
+//Rutas para Agregar usuarios
+Route::post('/agregarUser','UserController@agregarUser')->name('agregarUser');
 

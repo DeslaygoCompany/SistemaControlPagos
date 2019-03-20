@@ -69,16 +69,6 @@ class DeudorController extends Controller
         $rol ="Deudor";
         $exception= DB::beginTransaction();
         
-        $verUser= User::where('username','user1')->first();
-        if(is_null($verUser)){
-            return response->json($verUser);
-        }
-        else{
-            $sesion = Session::flash('status');
-            return return response->json($verUser);
-            
-        }
-        
         try{
         //Guardar datos de deudor
         $deudor = new Deudor();
@@ -142,12 +132,8 @@ class DeudorController extends Controller
             $deudor->delete();
             return back()->with('success','El deudor se elimino con exito.');
         }catch(QueryException $ex){
-            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
-             
-        }
-        
-        
-        
+            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.'); 
+		}
     }
     
     //Método para actualizar la información del deudor
