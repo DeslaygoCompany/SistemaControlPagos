@@ -47,6 +47,8 @@ Route::get('/validarUser','UserController@validarUser');
 
 //Rutas para Agregar usuarios
 Route::post('/agregarUser','UserController@agregarUser')->name('agregarUser');
+Route::post('/eliminar_user','UserController@eliminar_user')->name('eliminar_user');
+
 
 /*RUTAS PARA GESTONAR LAS FACTURAS*/
 Route::post('/agregar_factura','FacturasController@agregar_factura');

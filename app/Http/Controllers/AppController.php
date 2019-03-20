@@ -58,7 +58,10 @@ class AppController extends Controller
     }
     //ruta para la página de usuarios
     public function usuarios(){
-        return view('modulos.usuarios.main');
+		$users=User::all();
+        return view('modulos.usuarios.main', [
+			'users'=>$users,
+		]);
     }
     
     //ruta que muestra la informacionen el perfil del deudor

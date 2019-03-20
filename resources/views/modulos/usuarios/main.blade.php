@@ -16,7 +16,7 @@
        </div>
         <div class="row">
             <div class="col-md-4">
-                <button class="btn btn-agregar" type="button" data-toggle="collapse" data-target="#collapseAgregar" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus-circle"></i> Agregar Pago</button>
+                <button class="btn btn-agregar" type="button" data-toggle="collapse" data-target="#collapseAgregar" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus-circle"></i> Agregar usuario</button>
                 <button class="btn btn-agregar ml-2"><i class="fa fa-file-excel-o"></i> Exportar</button>
             </div>
         </div>
@@ -34,26 +34,18 @@
                         <th scope="col">Contraseña</th>
                         <th scope="col">Rol</th>
                         <th escope="col">Eliminar</th>
-                        <th escope="col">Ver detalles</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>User1</td>
-                        <td>user@mail.com</td>
-                        <td>user12344</td>
-                        <td>Administrador</td>
-                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor"><i class="fa fa-trash-o"></i></button></td>
-                        <td><button class="btn btn-detalles" ><i class="fa fa-info-circle"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>User1</td>
-                        <td>user@mail.com</td>
-                        <td>user12344</td>
-                        <td>Administrador</td>
-                        <td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarDeudor"><i class="fa fa-trash-o"></i></button></td>
-                        <td><button class="btn btn-detalles"><i class="fa fa-info-circle"></i></button></td>
-                    </tr>
+                   @foreach($users as $u)
+                   <tr>
+                   	<td>{{$u->username}}</td>
+                   	<td>{{$u->email}}</td>
+                   	<td>{{$u->password}}</td>
+                   	<td>{{$u->rol}}</td>
+                   	<td><button class="btn btn-eliminar" data-toggle="modal" data-target="#modalEliminarUser" data-id="{{$u->id}}" data-username="{{$u->username}}"><i class="fa fa-trash-o"></i></button></td>
+                   </tr>
+                   @endforeach 
                 </tbody>
             </table>
         </div>
