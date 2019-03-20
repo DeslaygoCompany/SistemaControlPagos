@@ -14,12 +14,15 @@ class CreateFacturaTable extends Migration
     public function up()
     {
         Schema::create('factura', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
             $table->increments('id');
             $table->string('folio',30);
             $table->string('nombre_empresa',50);
             $table->string('direccion',100);
             $table->string('telefono',15);
-            $table->date('fecha_expedicion');
+            $table->string('fecha_expedicion',50);
+            $table->string('estado');
             $table->integer('no_pago');
             $table->date('fecha_pago');
             $table->timestamps();

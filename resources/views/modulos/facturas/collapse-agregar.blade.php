@@ -5,7 +5,8 @@
             <h3 id="title-info"><strong>Registrar un pago</strong></h3>
         </div>
         <div class="card card-body">
-            <form action="">
+            <form id="formAgregarFactura" class="needs-validation" action="/agregar_factura" method="post" novalidate>
+               {{ csrf_field() }}
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
                         <label for="deudor">Nombre del deudor</label>
@@ -13,46 +14,58 @@
                     <div class="col-sm-10">
                        <select class="custom-select" name="deudor" id="deudor" required>
                             <option value="">Seleccione...</option>
-                            @if(isset($deudores))
+                            @if(sizeOf($deudores) == 0)
+                            <option value="">No hay deudores</option>
+                            @else
                             @foreach($deudores as $deudor)
                             <option value="{{$deudor->id}}">{{$deudor->nombre}} {{$deudor->apellidos}}</option>
                             @endforeach
-                            @else
-                            <option value="">No hay deudores</option>
                             @endif
                         </select>
+                        <div class="invalid-feedback">
+                            Debe elegir el nombre de un deudor
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Folio</label>
+                        <label for="folio">Folio</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba el folio...">
+                        <input class="form-control" type="text" name="folio" id="folio" value="{{$folio}}" placeholder="" required readonly>
+                         <div class="invalid-feedback">
+                            El campo folio esta vacío
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Nombre de la empresa</label>
+                        <label for="nombre_empresa">Nombre de la empresa</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba el nombre de la empresa...">
+                        <input class="form-control" value="Consulting and Bussines Training" type="text" name="nombre_empresa" id="nombre_empresa" placeholder="El campo debe contener solo letras, máximo 50 caracteres" maxlength="50" v-bind:pattern="reglaLetras" required readonly>
+                        <div class="invalid-feedback">
+                            El campo nombre de la empresa esta vacío o el formato es incorrecto
+                        </div>
+                    </div>
+                    
+                </div>
+               <div class="form-group row mt-1">
+                    <div class="col-sm-2">
+                        <label for="direccion">Dirección</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input class="form-control" value="Colonia el Carmen. Puebla, Puebla. 15 Poniente No. 120, Despacho 103, 104" type="text" name="direccion" id="direccion" placeholder="El campo debe contener máximo 100 caracteres" maxlength="100" required readonly>
+                        <div class="invalid-feedback">El campo dirección esta vacío</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Dirección</label>
+                        <label for="telefono">Teléfono</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba la dirección...">
-                    </div>
-                </div>
-                <div class="form-group row mt-1">
-                    <div class="col-sm-2">
-                        <label for="">Telefono</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="" id="" placeholder="Escriba el número telefónico...">
+                        <input class="form-control" type="tel" name="telefono" id="telefono" placeholder="El campo debe contener solo números, obligatorio 10 dígitos" maxlength="10" pattern="[0-9]{10}" value="2227986359" required readonly>
+                        <div class="invalid-feedback">El campo teléfono debe contener 10 dígitos o esta vacío</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
@@ -65,18 +78,20 @@
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Número de pago</label>
+                        <label for="no_pago">Número de pago</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" min="0" name="" id="" placeholder="Escriba el número de pago...">
+                        <input class="form-control" type="number" min="0" name="no_pago" id="no_pago" placeholder="Se llenará cuando eliga un deudor" required readonly>
+                         <div class="invalid-feedback">El campo número de pago esta vacío</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Fecha de pago</label>
+                        <label for="fecha_pago">Fecha de pago</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" required>
+                         <div class="invalid-feedback">El campo fecha de pago esta vacío</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
@@ -84,68 +99,80 @@
                         <label for="">Concepto</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" name="" id="" placeholder="Escriba el concepto...">
+                        <input class="form-control" type="text" name="concepto" id="concepto" placeholder="Se llenará cuando eliga un deudor" required readonly>
+                        <div class="invalid-feedback">El campo concepto esta vacío, se llena cuando elige un deudor</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Método de pago</label>
+                        <label for="metodo_pago">Método de pago</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba el método de pago...">
+                        <select class="custom-select" name="metodo_pago" id="metodo_pago" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Deposito">Deposito</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                         <div class="invalid-feedback">Debe elegir un método de pago</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Banco</label>
+                        <label for="banco">Banco donde se realizo el pago</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba el banco...">
+                        <input class="form-control" type="text" name="banco" id="banco" placeholder="" maxlength="50" v-bind:pattern="reglaLetras" required>
+                        <div class="invalid-feedback">El campo banco esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Número de cuenta</label>
+                        <label for="no_cuenta">Número de cuenta</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" min="0" name="" id="" placeholder="Escriba el número de cuenta...">
+                        <input class="form-control" type="text" min="0" name="no_cuenta" id="no_cuenta" placeholder="" value="Scotiabank" required readonly>
+                        <div class="invalid-feedback">El campo número de cuenta esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="estado_civil">Estado de la factura</label>
+                        <label for="estado">Estado de la factura</label>
                     </div>
                     <div class="col-sm-10">
-                        <select class="custom-select" name="estado_civil" id="estado_civil" required>
+                        <select class="custom-select" name="estado" id="estado" required>
                             <option value="">Seleccione...</option>
                             <option value="Pendiente">Pendiente</option>
                             <option value="Realizado">Realizado</option>
                         </select>
-                         <div class="invalid-feedback">Debe elegir un estado civil</div>
+                         <div class="invalid-feedback">Debe elegir un estado para la factura</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Cantidad</label>
+                        <label for="cantidad">Cantidad</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" name="" id="" placeholder="Escriba la cantidad...">
+                        <input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Escriba la cantidad..." required min="0">
+                        <div class="invalid-feedback">El campo cantidad esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Nota</label>
+                        <label for="nota">Nota</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="" id="" placeholder="Escriba la nota...">
+                       <textarea class="form-control" name="nota" id="nota" readonly required>Este documento solo es válido siempre y cuando exista el original en las oficinas de Consulting & Business Training. La reproducción no autorizada de este comprobante constituye un delito en los términos de las disposiciones fiscales. 
+                       </textarea>
+                        <div class="invalid-feedback">El campo nota esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <div class="col-sm-2">
-                        <label for="">Total</label>
+                        <label for="total">Total</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" min="0" name="" id="" placeholder="Escriba el total...">
+                        <input class="form-control" type="text" min="0" name="total" id="total" placeholder="Se llenará cuando eliga un deudor" required readonly>
+                         <div class="invalid-feedback">El campo total esta vacío, se llena cuando elige un deudor</div>
                     </div>
                 </div>
                 <button class="btn btn-detalles"><i class="fa fa-floppy-o"></i> Guardar</button>

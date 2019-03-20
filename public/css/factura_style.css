@@ -1,0 +1,43 @@
+#conteindo{
+    margin-top: 100px;
+    background-color: white;
+}
+
+#logoEmpresa{
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+hr.style3 {
+	border-top: 2px dashed #6c6b6b;
+}
+#informacionEmpresa{
+    text-align: center;
+    align-content: center;
+    margin-bottom: 0;
+}
+#informacion1{
+    margin-bottom: 0;
+}
+h3{
+    margin-bottom: 10px;
+}
+p{
+    line-height:3px;
+}
+#dir{
+    margin-left: 20px;
+}
+#nota{
+    margin-top: 10px;
+    margin-left: 35px;
+    text-align: justify;
+}
+table{
+    margin-left: 35px;
+    border:0;
+    
+}
+.data{
+   padding-left: 200px;
+}

@@ -8,12 +8,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 //Uso de los modelos
 use App\Detalle_deudor;
 use App\Deuda;
 use App\Deudor;
 use App\User;
+use App\Factura;
 
 //uso de la clase de exportacion
 use App\Exports\DeudorExport;
@@ -22,14 +24,19 @@ class DeudorController extends Controller
 {
     //Método para mostrar el perfil del deudor
     public function perfil(Deudor $deudor){
+        $facturas = $deudor->facturas;
         return view('modulos.deudores.perfil',[
             'deudor' => $deudor,
+            'facturas' => $facturas,
         ]);
     }
     
     //Método para mostrar el historial de pagos del deudor
     public function historial(){
-        return view('modulos.perfil-deudor.historial-pagos');
+        $facturas = Factura::all();
+        return view('modulos.perfil-deudor.historial-pagos',[
+            'facturas' => $facturas,
+        ]);
     }
     
     //Método para mostrar la información del deudor
@@ -59,16 +66,15 @@ class DeudorController extends Controller
         
         //obtención de los datos para deuda
         $banco_predilecto= $request->input('banco_predilecto');
-        $total= $request->input('total');
+        $total= $request->get('total');
         $concepto= $request->input('concepto');
         
         //obtención de los datos para usuario
         $username = $request->input('username');
         $email= $request->input('email');
-        $password= $request->input('password');
+        $password= Hash::make($request->input('password'));
         $rol ="Deudor";
         $exception= DB::beginTransaction();
-        
         try{
         //Guardar datos de deudor
         $deudor = new Deudor();
@@ -113,13 +119,12 @@ class DeudorController extends Controller
         DB::commit();
             alert()->success('¡Operación exitosa!','El deudor se ha guardado correctamente.')->persistent('Cerrar');
             return back();
-            //return back()->with('success','El deudor se ha guardado correctamente.');
+           
         }catch(QueryException $ex){
             dd($ex);
             DB::rollBack();
             alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
             return back();
-            //return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
         }
 
     }
@@ -130,10 +135,14 @@ class DeudorController extends Controller
         try{
             $deudor = Deudor::where('id',$id)->first();
             $deudor->delete();
-            return back()->with('success','El deudor se elimino con exito.');
+           alert()->success('¡Operación exitosa!','El deudor se ha eliminado correctamente.')->persistent('Cerrar');
         }catch(QueryException $ex){
-            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.'); 
-		}
+             alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
+            return back();
+             
+        }
+        
+       
     }
     
     //Método para actualizar la información del deudor
@@ -165,7 +174,7 @@ class DeudorController extends Controller
         //obtención de los datos para usuario
         $username = $request->input('username');
         $email= $request->input('email');
-        $password= $request->input('password');
+        $password= Hash::make($request->input('password'));
         $rol ="Deudor";
         $exception= DB::beginTransaction();
         try{
@@ -210,16 +219,40 @@ class DeudorController extends Controller
         $user->save();
             
         DB::commit();
-            return back()->with('success','El deudor se ha actualizado correctamente.');
+            alert()->success('¡Operación exitosa!','El deudor se ha actualizado correctamente.')->persistent('Cerrar');
+        return back();
         }catch(QueryException $ex){
-            dd($ex);
             DB::rollBack();
-            return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
+              alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
+            return back();
         }
     }
     //Método para exportar a excel
     public function exportarDeudores(){        
      return (new DeudorExport)->download('deudores.xlsx');
+    }
+    
+    //Metodo para devolver la información de un deudor seleccionado
+    public function seleccionarDeudor(Request $request){
+        $idDeudor = $request->get('idDeudor');
+        
+        $deudor = Deudor::where('id',$idDeudor)->first();
+        
+        //Generar el número de pago
+        $facturas = $deudor->facturas()->count();
+        $numFacturas= $facturas + 1;
+        //Obtiene los datos del deudor
+        $deuda = $deudor->deuda;
+        $concepto = $deuda->concepto;
+        $total = $deuda->total;
+        
+        
+        
+        return response()->json([
+            'numFacturas' => $numFacturas,
+            'concepto' => $concepto,
+            'total' => $total
+        ]);
     }
     
 }

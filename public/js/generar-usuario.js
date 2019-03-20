@@ -1,4 +1,4 @@
-var gen= new Vue({
+ var gen = new Vue({
     el:'#contenido',
     data:{
         nombre:"",

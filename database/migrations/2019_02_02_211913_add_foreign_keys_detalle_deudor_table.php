@@ -14,6 +14,8 @@ class AddForeignKeysDetalleDeudorTable extends Migration
     public function up()
     {
         Schema::table('detalle_deudor', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
              $table->engine = 'InnoDB';
             /*Modifica y agrega la llave id_deudor foranea a la tabla detalle_deudor*/
             $table->integer('id_deudor')->unsigned()->nullable();

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 //Uso de los modelos
 use App\Detalle_deudor;
 use App\Deuda;
+use App\Factura;
 use App\Deudor;
 use App\User;
 use Carbon\Carbon;
@@ -25,6 +26,7 @@ class AppController extends Controller
     //ruta para la página de deudores
     public function deudores(){
         $deudores= Deudor::all();
+        
         return view('modulos.deudores.main',[
                    'deudores' =>  $deudores,
                    ]);
@@ -32,13 +34,26 @@ class AppController extends Controller
     //ruta para la página de pagos
     public function pagos(){
         $deudores= Deudor::all();
+        //se genera un folio para la factura
+         $facturas= Factura::all();
+        $ultimaFact = $facturas->last();
+        if(is_null($ultimaFact)){
+            $folio= 1;
+            
+        }else{
+         $numFact = $ultimaFact->folio;
+         $folio = $numFact + 1;
+        }
+        
         $fe = Carbon::now('America/Chicago');
         $fecha = $fe->format('d/m/Y h:i');
         
         
         return view('modulos.facturas.main',[
             'deudores' => $deudores,
-            'fecha'=> $fecha
+            'fecha'=> $fecha,
+            'folio' => $folio,
+            'facturas' => $facturas
         ]);
     }
     //ruta para la página de usuarios
@@ -46,15 +61,13 @@ class AppController extends Controller
         return view('modulos.usuarios.main');
     }
     
-    public function actual_date ()  
-{  
-    $week_days = array ("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");  
-    $months = array ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");  
-    $year_now = date ("Y");  
-    $month_now = date ("n");  
-    $day_now = date ("j");  
-    $week_day_now = date ("w");  
-    $date = $week_days[$week_day_now] . ", " . $day_now . " de " . $months[$month_now] . " de " . $year_now;   
-    return $date;    
-}
+    //ruta que muestra la informacionen el perfil del deudor
+    public function informacion(){
+        return view('modulos.perfil-deudor.informacion');
+    }
+    
+    //En caso de no encontrar la ruta
+    public function notFound(){
+        return view('modulos.errors.404');
+    }
 }

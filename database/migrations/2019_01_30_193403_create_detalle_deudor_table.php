@@ -14,13 +14,15 @@ class CreateDetalleDeudorTable extends Migration
     public function up()
     {
         Schema::create('detalle_deudor', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_spanish_ci';
             $table->increments('id');
             $table->string('celular',15)->nullable();
             $table->string('skype',35)->nullable();
             $table->string('pais',50)->nullable();
             $table->string('nacionalidad',30)->nullable();
             $table->string('rfc',14);
-            $table->string('razon_social',30);
+            $table->string('razon_social',100);
             $table->string('direccion',100);
             
             $table->timestamps();

@@ -142,12 +142,16 @@ footer {
     height: 30px;
     border-radius: 50%;
     background-color: #2ecc71;
+    color:#2ecc71;
+    text-align: center;
 }
 .estado-pendiente{
     width: 30px;
     height: 30px;
     border-radius: 50%;
     background-color: #e74c3c;
+    color:#e74c3c;
+    text-align: center;
 }
 .estado{
     align-content: center;
@@ -163,6 +167,9 @@ footer {
 }
 #notaGeneraUser{
     color: #7f8c8d;
+}
+#nota{
+    height: 80px;
 }
 
 
