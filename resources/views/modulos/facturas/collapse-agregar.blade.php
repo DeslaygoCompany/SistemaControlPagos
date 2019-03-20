@@ -152,7 +152,7 @@
                         <label for="cantidad">Cantidad</label>
                     </div>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Escriba la cantidad..." required min="0">
+                        <input class="form-control" type="number" name="cantidad" id="cantidad" placeholder="Escriba la cantidad..." required min="0">
                         <div class="invalid-feedback">El campo cantidad esta vacío o el formato es incorrecto</div>
                     </div>
                 </div>
