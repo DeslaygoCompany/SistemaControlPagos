@@ -18,7 +18,7 @@ class AddForeignKeysDetalleFacturaTable extends Migration
             $table->collation = 'utf8_spanish_ci';
             $table->engine = 'InnoDB';
             /*Modifica y agrega la llave id_factura foranea a la tabla detalle_factura*/
-            $table->integer('id_factura')->unsigned()->nullable();
+            $table->integer('id_factura')->unsigned();
             $table->foreign('id_factura')->references('id')->on('factura')->onDelete('cascade');
             //
         });

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Exports\usersExport;
 use App\User;
+use App\Factura;
+use App\deudor;
 
 class UserController extends Controller
 {
@@ -48,19 +50,33 @@ class UserController extends Controller
         }
 				
 	}
+    
+    //Método para eliminar a un usuario
 	public function eliminar_user(Request $request){
 		$id=$request->input('id');
+        
+        $exception= DB::beginTransaction();
 		try{
 			$user=User::where('id',$id)->first();
-			$user->delete();
+            $idDeudor= $user->id_deudor;
+            if(is_null($idDeudor)){
+                $user->delete();
+            }else{
+                $deudor= Deudor::where('id',$idDeudor)->first();
+                $deudor->facturas()->delete();
+                $deudor->delete();
+                $user->delete();
+            }
+			
+            DB::commit();
 			alert()->success('¡Operación exitosa!','El usuario se ha eliminado correctamente.')->persistent('Cerrar');
             return back();
 			
 		}
 		catch(QueryException $ex){
+            DB::rollBack();
             alert()->error('¡Hubo un problema','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.')->persistent('Cerrar');
             return back();
-            //return back()->with('status','Ocurrieron algunos problemas en el proceso, intentelo de nuevo.');
         }
 	}
     

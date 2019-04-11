@@ -19,11 +19,11 @@ class AddForeignKeysFacturaTable extends Migration
             $table->engine = 'InnoDB';
             /*Modifica y agrega la llave id_detalle_deudor foranea a la tabla deudor*/
             $table->integer('id_deudor')->unsigned()->nullable();
-            $table->foreign('id_deudor')->references('id')->on('deudor')->onDelete('set null');
+            $table->foreign('id_deudor')->references('id')->on('deudor');
             
             /*Modifica y agrega la llave id_user foranea a la tabla detalle_factura*/
-            $table->integer('id_detalle_factura')->unsigned()->nullable();
-            $table->foreign('id_detalle_factura')->references('id')->on('detalle_factura')->onDelete('cascade');
+            /*$table->integer('id_detalle_factura')->unsigned()->nullable();
+            $table->foreign('id_detalle_factura')->references('id')->on('detalle_factura')->onDelete('cascade');*/
         });
     }
 
@@ -42,8 +42,8 @@ class AddForeignKeysFacturaTable extends Migration
             
             /*hace un drop a la llave foranea id_detalle_factura
             si es que ya existe*/
-            $table->dropForeign('id_detalle_factura');
-            $table->dropColumn('id_detalle_factura');
+            /*$table->dropForeign('id_detalle_factura');
+            $table->dropColumn('id_detalle_factura');*/
         });
     }
 }

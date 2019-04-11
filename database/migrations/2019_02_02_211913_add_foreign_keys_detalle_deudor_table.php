@@ -18,7 +18,7 @@ class AddForeignKeysDetalleDeudorTable extends Migration
             $table->collation = 'utf8_spanish_ci';
              $table->engine = 'InnoDB';
             /*Modifica y agrega la llave id_deudor foranea a la tabla detalle_deudor*/
-            $table->integer('id_deudor')->unsigned()->nullable();
+            $table->integer('id_deudor')->unsigned();
             $table->foreign('id_deudor')->references('id')->on('deudor')->onDelete('cascade');
         });
     }

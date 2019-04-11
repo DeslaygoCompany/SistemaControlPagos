@@ -16,6 +16,7 @@ class CreateFacturaTable extends Migration
         Schema::create('factura', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_spanish_ci';
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('folio',30);
             $table->string('nombre_empresa',50);

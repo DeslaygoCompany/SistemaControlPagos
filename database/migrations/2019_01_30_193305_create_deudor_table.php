@@ -14,8 +14,10 @@ class CreateDeudorTable extends Migration
     public function up()
     {
         Schema::create('deudor', function (Blueprint $table) {
+            
             $table->charset = 'utf8';
             $table->collation = 'utf8_spanish_ci';
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nombre',50);
             $table->string('apellidos',100);
