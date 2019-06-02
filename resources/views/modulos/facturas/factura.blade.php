@@ -72,6 +72,9 @@
                <p>de Consulting & Business Training. La reproducción no autorizada de este comprobante</p>
                <p>constituye un delito en los términos de las disposiciones fiscales.</p>
            </div>
+           <div class="firma">
+               <img src="{{ public_path('images/firma.png')}}" alt="">
+           </div>
  
    </div>
 
